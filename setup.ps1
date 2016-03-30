@@ -49,8 +49,7 @@ echo 'Extracting Selenium Server...'
 [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
 [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\Vagrant\selenium-server.zip", "$env:USERPROFILE\selenium-server")
 
-echo 'Configuring logon to run Selenium Server Hub and Node...'
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v selenium-server-hub /t REG_EXPAND_SZ /d "%USERPROFILE%\selenium-server\selenium-server-hub.cmd" /f
+#echo 'Configuring logon to run Selenium Node...'
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v selenium-server-node /t REG_EXPAND_SZ /d "%USERPROFILE%\selenium-server\selenium-server-node.cmd" /f
 
 echo 'DONE installing the Selenium Server!'
@@ -62,9 +61,9 @@ Sleep 5
 echo 'Intalling the Selenium Server...'
 psexec -accepteula -u selenium-server -p $seleniumServerPassword powershell -File C:\tmp\install-selenium-server.ps1
 
-# poke a hole in the firewall to allow access to the 4444 TCP port.
-echo 'Configuring the firewall to allow access to the Selenium Server Hub...'
-netsh advfirewall firewall add rule name="Selenium Server Hub (HTTP-In)" dir=in action=allow protocol=TCP localport=4444
+# Turn firewall off
+echo 'Turning off Firewall'
+NetSh Advfirewall set allprofiles state off
 
 # configure auto-logon to the selenium-server user.
 # NB this has to run AFTER this script ends! So be sure this is always at the

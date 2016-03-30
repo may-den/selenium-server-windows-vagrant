@@ -8,10 +8,10 @@ $root_provision_script = <<'ROOT_PROVISION_SCRIPT'
 # set keyboard layout.
 # NB you can get the name from the list:
 #      [System.Globalization.CultureInfo]::GetCultures('InstalledWin32Cultures') | out-gridview
-Set-WinUserLanguageList pt-PT -Force
+#Set-WinUserLanguageList pt-PT -Force
 
 # set the date format, number format, etc.
-Set-Culture pt-PT
+#Set-Culture pt-PT
 
 # set the timezone.
 # tzutil /l lists all available timezone ids
@@ -49,7 +49,7 @@ ROOT_PROVISION_SCRIPT
 
 Vagrant.configure("2") do |config|
     config.vm.define "selenium-server"
-    config.vm.box = "windows_2012_r2"
+    config.vm.box = "win7-ie8"
 
     config.vm.provider :virtualbox do |v, override|
         v.gui = true
