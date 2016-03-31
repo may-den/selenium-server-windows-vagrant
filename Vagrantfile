@@ -61,4 +61,6 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: $root_provision_script
 
     config.vm.network "forwarded_port", guest: 4444, host: 4444
+    config.vm.network "forwarded_port", guest: 5556, host: 5556
+
 end
