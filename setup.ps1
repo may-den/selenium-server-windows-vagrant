@@ -65,6 +65,9 @@ psexec -accepteula -u selenium-server -p $seleniumServerPassword powershell -Fil
 echo 'Turning off Firewall'
 NetSh Advfirewall set allprofiles state off
 
+# Disable IE8/9 first time setup
+reg import Disable_IE_First_Run_Open_Home_Page.reg
+
 # configure auto-logon to the selenium-server user.
 # NB this has to run AFTER this script ends! So be sure this is always at the
 #    end of this script.
